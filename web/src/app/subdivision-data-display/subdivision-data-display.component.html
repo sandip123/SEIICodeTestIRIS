@@ -1,1 +1,61 @@
-<p>Display the subdivision data here!</p>
+<h4></h4>
+<label for="filter">Filter by Status:</label>
+<select id="filter" [(ngModel)]="selectedFilter" (change)="applyFilter()">
+  <option value="">All</option>
+  <option value="Active">Active</option>
+  <option value="Future">Future</option>
+  <option value="Builtout">Builtout</option>
+</select>
+
+<!-- Sort by subdivisionName or nearMapImageDate -->
+<label for="sort">Sort by:</label>
+<select id="sort" [(ngModel)]="selectedSort" (change)="applySort()">
+  <option value="name">Subdivision Name</option>
+  <option value="date">NearMap Image Date</option>
+</select>
+
+
+<div class="container">
+    <div class="data-warp"
+        *ngFor="let subdivision of filteredAndSortedSubdivisions | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
+        <h3><strong>{{subdivision.name }}</strong></h3>
+        <p><strong>Code:</strong> {{subdivision.code }}</p>
+        <p>
+            <span><strong>Location:</strong> {{subdivision.latitude }}, {{subdivision.longitude }}</span>
+            <span *ngIf="subdivision.fieldSurveyTerritoryId"><strong>FieldSurveyTerritoryId:</strong> {{subdivision.fieldSurveyTerritoryId}}</span>
+            <span *ngIf="subdivision.marketId"><strong>MarketId:</strong> {{subdivision.marketId}}</span>
+            <span *ngIf="subdivision.subdivisionStatusId"><strong>SubdivisionStatusId:</strong> {{subdivision.subdivisionStatusId}}</span>
+            <span *ngIf="subdivision.surveyMethodId"><strong>SurveyMethodId:</strong> {{subdivision.surveyMethodId}}</span>
+            <span *ngIf="subdivision.activeSections"><strong>ActiveSections:</strong> {{subdivision.activeSections}}</span>
+            <span *ngIf="subdivision.futureSections"><strong>FutureSections:</strong> {{subdivision.futureSections}}</span>
+            <span *ngIf="subdivision.builtOutSections"><strong>BuiltOutSections:</strong> {{subdivision.builtOutSections}}</span>
+            <span *ngIf="subdivision.totalLots"><strong>TotalLots:</strong> {{subdivision.totalLots}}</span>
+            <span *ngIf="subdivision.fieldSurveyTerritoryName"><strong>FieldSurveyTerritoryName:</strong> {{subdivision.fieldSurveyTerritoryName}}</span>
+            <span *ngIf="subdivision.marketName"><strong>MarketName:</strong> {{subdivision.marketName}}</span>
+            <span *ngIf="subdivision.marketAbbreviation"><strong>MarketAbbreviation:</strong> {{subdivision.marketAbbreviation}}</span>
+            <span *ngIf="subdivision.subdivisionStatusCode"><strong>SubdivisionStatusCode:</strong> {{subdivision.subdivisionStatusCode}}</span>
+            <span *ngIf="subdivision.surveyMethodCode"><strong>SurveyMethodCode:</strong> {{subdivision.surveyMethodCode}}</span>
+            <span *ngIf="subdivision.county"><strong>County:</strong> {{subdivision.county}}</span>
+            <span *ngIf="subdivision.community"><strong>Community:</strong> {{subdivision.community}}</span>
+            <span *ngIf="subdivision.zoom17Date"><strong>Zoom17Date:</strong> {{subdivision.zoom17Date | date:'dd-MM-yyyy'}}</span>
+            <span *ngIf="subdivision.zoom18Date"><strong>Zoom18Date:</strong> {{subdivision.zoom18Date | date:'dd-MM-yyyy'}}</span>
+            <span *ngIf="subdivision.subdivisionGeometryId"><strong>SubdivisionGeometryId:</strong> {{subdivision.subdivisionGeometryId}}</span>
+            <span *ngIf="subdivision.subdivisionGeometryBoundingBoxId"><strong>SubdivisionGeometryBoundingBoxId:</strong> {{subdivision.subdivisionGeometryBoundingBoxId}}</span>
+            <span *ngIf="subdivision.subdivisionGeometryBoundaryId"><strong>SubdivisionGeometryBoundaryId:</strong> {{subdivision.subdivisionGeometryBoundaryId}}</span>
+            <span *ngIf="subdivision.subdivisionGeometryIntelligenceBoundaryId"><strong>SubdivisionGeometryIntelligenceBoundaryId:</strong> {{subdivision.subdivisionGeometryIntelligenceBoundaryId}}</span>
+            <span *ngIf="subdivision.subdivisionGeometryIntelligenceBoundaryStatusId"><strong>SubdivisionGeometryIntelligenceBoundaryStatusId:</strong> {{subdivision.subdivisionGeometryIntelligenceBoundaryStatusId}}</span>
+            <span *ngIf="subdivision.subdivisionGeometryIntelligenceBoundaryStatusCode"><strong>SubdivisionGeometryIntelligenceBoundaryStatusCode:</strong> {{subdivision.subdivisionGeometryIntelligenceBoundaryStatusCode}}</span>
+            <span *ngIf="subdivision.subdivisionGeometryIntelligenceBoundaryStatusChangeDate"><strong>SubdivisionGeometryIntelligenceBoundaryStatusChangeDate:</strong> {{subdivision.subdivisionGeometryIntelligenceBoundaryStatusChangeDate | date:'dd-MM-yyyy'}}</span>
+            <span *ngIf="subdivision.nearMapImageDate"><strong>NearMapImageDate:</strong> {{subdivision.nearMapImageDate | date:'dd-MM-yyyy'}}</span>
+            <span *ngIf="subdivision.imageBoxId"><strong>ImageBoxId:</strong> {{subdivision.imageBoxId}}</span>
+            <span *ngIf="subdivision.mostRecentIPointBatchDate"><strong>MostRecentIPointBatchDate:</strong> 
+              {{subdivision.mostRecentIPointBatchDate | date:'dd-MM-yyyy'}}</span>
+            <span *ngIf="subdivision.iPoints"><strong>IPoints:</strong> {{subdivision.iPoints}}</span>
+            <span *ngIf="subdivision.validatediPoints"><strong>ValidatediPoints:</strong> {{subdivision.validatediPoints}}</span>
+            <span *ngIf="subdivision.subdivisionSpecificStatus"><strong>SubdivisionSpecificStatus:</strong> {{subdivision.subdivisionSpecificStatus}}</span>
+            
+
+        </p>
+    </div>
+</div>
+<pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
