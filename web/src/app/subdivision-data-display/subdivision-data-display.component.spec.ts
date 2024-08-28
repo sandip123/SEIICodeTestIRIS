@@ -1,9 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClientTestingModule,HttpTestingController } from '@angular/common/http/testing';
 import { SubdivisionDataDisplayComponent } from './subdivision-data-display.component';
 import { SubdivisionService } from './subdivision.service';
 import { of } from 'rxjs';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 describe('SubdivisionDataDisplayComponent', () => {
   let component: SubdivisionDataDisplayComponent;
@@ -12,7 +13,7 @@ describe('SubdivisionDataDisplayComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FormsModule, HttpClientTestingModule],
+      imports: [FormsModule, HttpClientTestingModule, NgxPaginationModule],
       declarations: [SubdivisionDataDisplayComponent],
       providers: [SubdivisionService]
     })
